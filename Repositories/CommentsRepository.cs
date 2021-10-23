@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -71,6 +72,19 @@ namespace Bloggr.Repositories
       SELECT * FROM comments c WHERE c.blog = @blogId
       ";
       return _db.Query<Comment>(sql, new{blogId}).ToList();
+    }
+
+    internal void DeleteComment(int commentId)
+    {
+      string sql=@"
+      DELETE FROM comments
+      WHERE id = @commentId LIMIT 1;
+      ";
+      var rowsAffected = _db.Execute(sql, new {commentId});
+      if(rowsAffected == 0)
+      {
+        throw new Exception("something bad seems to have happened dummy");
+      }
     }
   }
 }

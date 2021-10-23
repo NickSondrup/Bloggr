@@ -52,5 +52,21 @@ namespace Bloggr.Controllers
         return BadRequest(e.Message);
       }
     }
+
+    [Authorize]
+    [HttpDelete("{commentId}")]
+    public async Task<ActionResult<string>> DeleteComment(int commentId)
+    {
+      try
+      {
+        Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
+        _CommentsService.DeleteComment(commentId, userInfo.Id);
+        return Ok("Comment was beaten up, and pretty badly I hear. Then ground to a fine powder.");
+      }
+      catch (System.Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
   }
 }

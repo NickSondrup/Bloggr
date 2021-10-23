@@ -6,11 +6,11 @@ namespace Bloggr.Controllers
 {
   [ApiController]
   [Route("api/[controller]")]
-  public class ProfilesController : ControllerBase
+  // REVIEW ProfileController may need to be switched to ProfilesController
+  public class ProfileController : ControllerBase
   {
     private readonly ProfilesService _ProfileService;
-
-    public ProfilesController(ProfilesService profileService)
+    public ProfileController(ProfilesService profileService)
     {
       _ProfileService = profileService;
     }

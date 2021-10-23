@@ -48,5 +48,15 @@ namespace Bloggr.Services
     {
       return _commentsRepository.GetCommentsByBlog(blogId);
     }
+
+    internal void DeleteComment(int commentId, string userId)
+    {
+      Comment foundComment = GetById(commentId);
+      if(foundComment.CreatorId != userId)
+      {
+        throw new Exception("The dark fire will not avail you!");
+      }
+      _commentsRepository.DeleteComment(commentId);
+    }
   }
 }

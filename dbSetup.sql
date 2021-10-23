@@ -21,8 +21,6 @@ CREATE TABLE IF NOT EXISTS comments(
   creatorId varchar(255) NOT NULL comment 'creatorId',
   body varchar(5000) NOT NULL comment 'comments body',
   blog int NOT NULL comment 'id of blog comment is attached to',
-  -- title varchar(255) NOT NULL comment 'title of comment',
-  -- published TINYINT NOT NULL DEFAULT 1 comment 'for bool of published',
   FOREIGN KEY(creatorId) REFERENCES accounts(id) ON DELETE CASCADE,
   FOREIGN KEY(blog) REFERENCES blogs(id) ON DELETE CASCADE 
 ) default charset utf8 comment '';
