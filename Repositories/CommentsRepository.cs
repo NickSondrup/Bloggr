@@ -86,5 +86,25 @@ namespace Bloggr.Repositories
         throw new Exception("something bad seems to have happened dummy");
       }
     }
+
+    internal List<Comment> GetCommentsByAccount(string userId)
+    {
+      var sql = @"
+      SELECT
+      * FROM comments
+      WHERE creatorId = @userId;
+      ";
+      return _db.Query<Comment>(sql, new{userId}).ToList();
+    }
+
+    internal List<Comment> GetCommentsByProfile(string accountId)
+    {
+      var sql=@"
+      SELECT 
+      * FROM comments
+      WHERE creatorId = @accountId;
+      ";
+      return _db.Query<Comment>(sql, new{accountId}).ToList();
+    }
   }
 }

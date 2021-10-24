@@ -19,7 +19,7 @@ namespace Bloggr.Repositories
     internal List<Blog> GetAll()
     {
       string sql = @"
-      SELECT * FROM blogs;
+      SELECT * FROM blogs WHERE published = 1;
       ";
       return _db.Query<Blog>(sql).ToList();
     }
@@ -76,6 +76,25 @@ namespace Bloggr.Repositories
         throw new System.Exception("You done did mess up a-a-ron");
       }
       return blogData;
+    }
+
+    public List<Blog> GetBlogsByAccount(string userId)
+    {
+      var sql = @"
+      SELECT
+      * FROM blogs
+      WHERE creatorId = @userId AND published = 1;
+      ";
+      return _db.Query<Blog>(sql, new{userId}).ToList();
+    }
+
+    internal List<Blog> GetBlogsByProfile(string accountId)
+    {
+      var sql = @"
+      SELECT * FROM blogs 
+      WHERE creatorId = @accountId AND published = 1;
+      ";
+      return _db.Query<Blog>(sql, new{accountId}).ToList();
     }
 
     internal void DeleteBlog(int blogId)

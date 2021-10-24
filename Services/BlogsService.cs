@@ -47,6 +47,12 @@ namespace Bloggr.Services
 
       return _blogsRepository.Update(blogId, blogData);
     }
+
+    public List<Blog> GetBlogsByProfile(string accountId)
+    {
+      return _blogsRepository.GetBlogsByProfile(accountId);
+    }
+
     public void DeleteBlog(int blogId, string userId)
     {
       Blog foundBlog = GetById(blogId);
@@ -55,6 +61,11 @@ namespace Bloggr.Services
         throw new Exception("this seems to not be your blog numbskull");
       }
       _blogsRepository.DeleteBlog(blogId);
+    }
+
+    public List<Blog> GetBlogsByAccount(string userId)
+    {
+      return _blogsRepository.GetBlogsByAccount(userId);
     }
   }
 }

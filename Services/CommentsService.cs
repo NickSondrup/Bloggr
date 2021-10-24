@@ -58,5 +58,15 @@ namespace Bloggr.Services
       }
       _commentsRepository.DeleteComment(commentId);
     }
+
+    public List<Comment> GetCommentsByProfile(string accountId)
+    {
+      return _commentsRepository.GetCommentsByProfile(accountId);
+    }
+
+    public List<Comment> GetCommentsByAccount(string userId)
+    {
+      return _commentsRepository.GetCommentsByAccount(userId);
+    }
   }
 }
